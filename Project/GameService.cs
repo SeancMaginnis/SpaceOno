@@ -41,7 +41,7 @@ namespace CastleGrimtol.Project
                                              SSt  `------'`
 ");
       Console.WriteLine("Hello Investigator, I hope you've slept well we have arrived at Station Hope. I have been attempting to contact the station since we've been in hailing range.\nI've received no response and my sensors aren't picking up any signs of life. As an Investigator I know " +
-                        "You've been tasked with solving mystery's,\nbut I strongly advise waiting for the fleet to arrive before proceeding. However as the ships computer I have to follow your orders what is your command?");
+                        "You've been tasked with solving mysteries,\nbut I strongly advise waiting for the fleet to arrive before proceeding. However as the ship's computer I have to follow your orders what is your command?");
       Console.WriteLine(Environment.NewLine);
       Console.WriteLine("You have a choice either be a gutless Investigator who is a pathetic scaredy cat and (w)ait for the fleet that was sent out two weeks after you left to investigate," +
                         "\nor be a awesome heroic Investigator who does his/her job even in the face of the unknown and (d)ock to the space station and investigate \n" +
@@ -62,6 +62,7 @@ namespace CastleGrimtol.Project
         Console.WriteLine(Environment.NewLine);
         Console.WriteLine("Alright Investigator what's your next move?");
         GetUserInput();
+        
 
       }
 
@@ -71,7 +72,7 @@ namespace CastleGrimtol.Project
     }
     public void Setup()
     {
-      Room ship = new Room("ship", "Your ship has been your home for the last several years as you've been in cryo sleep\non your way to investigate the loss of communications from humans first space station in a new solar system.");
+      Room ship = new Room("ship", "Your ship has been your home for the last several years as you've been in cryo sleep\n on your way to investigate the loss of communications from humans first space station in a new solar system.");
       Room hall = new Room("hall", "You enter a hallway that has doors to your right and left, there is a door at the end of the hall that is slightly ajar. The stale air, eerie calm, and lack of any signs of life has your senses straining for any sound or movement.");
       Room dcontrol = new Room("dcontrol", "This is a room for controlling the docking of ships to the space station");
       Room storage = new Room("storage", @"You have entered the space suit storage room. AHHH there is an alien at the end of the room making that sound like low clicks and whistles.
@@ -330,6 +331,7 @@ namespace CastleGrimtol.Project
  ░ ░         ░ ░     ░            ░  ░    ░ ░        ░     ░  ░
  ░Better luck next time..... ░                                                           
 ");
+            Thread.Sleep(5000);
             Reset();
             
            
