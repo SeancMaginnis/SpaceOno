@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading;
 using CastleGrimtol.Project.Interfaces;
@@ -23,6 +24,22 @@ namespace CastleGrimtol.Project
     {
       Setup();
       Console.Clear();
+      Console.WriteLine(@"
+                     `. ___
+                    __,' __`.                _..----....____
+        __...--.'``;.   ,.   ;``--..__     .'    ,-._    _.-'
+  _..-''-------'   `'   `'   `'     O ``-''._   (,;') _,'
+,'________________                          \`-._`-','
+ `._              ```````````------...___   '-.._'-:
+    ```--.._      ,.                     ````--...__\-.
+            `.--. `-`                       ____    |  |`
+              `. `.                       ,'`````.  ;  ;`
+                `._`.        __________   `.      \'__/`
+                   `-:._____/______/___/____`.     \  `
+                               |       `._    `.    \
+                               `._________`-.   `.   `.___
+                                             SSt  `------'`
+");
       Console.WriteLine("Hello Investigator, I hope you've slept well we have arrived at Station Hope. I have been attempting to contact the station since we've been in hailing range.\nI've received no response and my sensors aren't picking up any signs of life. As an Investigator I know " +
                         "You've been tasked with solving mystery's,\nbut I strongly advise waiting for the fleet to arrive before proceeding. However as the ships computer I have to follow your orders what is your command?");
       Console.WriteLine(Environment.NewLine);
@@ -54,10 +71,25 @@ namespace CastleGrimtol.Project
     }
     public void Setup()
     {
-      Room ship = new Room("Ship", "Your ship has been your home for the last several years as you've been in cryo sleep\non your way to investigate the loss of communications from humans first space station in a new solar system.");
-      Room hall = new Room("Hall", "You enter a hallway that has doors to your right and left, there is a door at the end of the hall that is slightly ajar. The stale air, eerie calm, and lack of any signs of life has your senses straining for any sound or movement.");
-      Room dcontrol = new Room("Docking Control", "This is a room for controlling the docking of ships to the space station");
-      Room storage = new Room("Space Suit Storage", "You have entered the space suit storage room it's to dark to see anything.\nYou do hear something that sounds like low clicks and whistles.");
+      Room ship = new Room("ship", "Your ship has been your home for the last several years as you've been in cryo sleep\non your way to investigate the loss of communications from humans first space station in a new solar system.");
+      Room hall = new Room("hall", "You enter a hallway that has doors to your right and left, there is a door at the end of the hall that is slightly ajar. The stale air, eerie calm, and lack of any signs of life has your senses straining for any sound or movement.");
+      Room dcontrol = new Room("dcontrol", "This is a room for controlling the docking of ships to the space station");
+      Room storage = new Room("storage", @"You have entered the space suit storage room. AHHH there is an alien at the end of the room making that sound like low clicks and whistles.
+      ____
+     /....)
+     |v v \
+     |^  ^ \
+     <^   ^ >
+     |^    ^\\_-_
+     i^     ^ \^/\
+     +' (@)  _\  7
+    / ..   _ -'  |
+   / ..  _~  _'  |
+  i    _~_.-\    |
+  I--~~_~  .|    |
+   ~~'| ''' |  _ |
+     /|-___-| | ||
+");
 
       //relationships
       ship.AddNearbyRoom(Direction.forward, hall);
@@ -68,8 +100,8 @@ namespace CastleGrimtol.Project
       bool darkness;
       storage.AddNearbyRoom(Direction.back, hall);
 
-      Item phaser = new Item("Phaser", "Your old trusty phaser that has saved your life more than once.");
-      Item flashlight = new Item("Flashlight", "When turned on this flashlight will illuminate dark rooms making it much easier to see.");
+      Item phaser = new Item("phaser", "Your old trusty phaser that has saved your life more than once.", "You've shot your phaser at the alien, you've missed!\nThe alien moved so fast you lose sight of it\nuntil it has your still beating heart in its hands");
+      Item flashlight = new Item("flashlight", "When turned on this flashlight will illuminate dark rooms making it much easier to see.", "Good call shining the flashlight into the eyes of the alien makes it go crazy\nit proceeds to rip out it's own heart!");
       /*Item onlight = new Item("Turned on Flashlight", "The flashlight turned on making it easier to see.");
       Item gravity = new Item("Gravity button", "Hmm a button with the words GRAVITY written above it.");*/
 
@@ -224,6 +256,7 @@ namespace CastleGrimtol.Project
           break;
       }
     }
+    
 
     public void TakeItem(string itemName)
     {
@@ -261,15 +294,77 @@ namespace CastleGrimtol.Project
       switch (itemName)
       {
         case "phaser":
-          if (CurrentRoom.Name == "storage")
+          if (CurrentRoom.Name.ToLower() == "storage")
           {
             Console.Clear();
-            Console.Write("You used your phaser ");
+            Console.Write(@"You used your phaser 
+|^\                      _________________/\_
+|~~~|--------------~~~~~~~~~~~~~~~~,xx.~~~~~~~~\
+|___|-------++++==|___|~~~~~|_____(x@x),;'//  ||
+                  |~~~||    |~~~~~~~~~~~ //   ||
+                   ~\(_(=)~~ ,-~-\       \  __/
+                      ~~~~~\[  \ ]\       \/
+                            `:  |'()       \\
+                              ~~~~\ \       \\
+                                   \ \       \\
+                                    \ \       \\
+                                     \ \       \\
+                                      \ \       ||
+                                       | \       ||
+                                       |  \_  ___||
+                                       \____( )-=~
+");
             CurrentPlayer.Inventory.Remove(item);
             Thread.Sleep(3000);
-
-
+            Console.WriteLine($"{item.UseItem}");
+            Thread.Sleep(2000);
+            Console.WriteLine(@"
+▓██   ██▓ ▒█████   █    ██     ██▓     ▒█████    ██████ ▓█████ 
+ ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▓██▒    ▒██▒  ██▒▒██    ▒ ▓█   ▀ 
+  ▒██ ██░▒██░  ██▒▓██  ▒██░   ▒██░    ▒██░  ██▒░ ▓██▄   ▒███   
+  ░ ▐██▓░▒██   ██░▓▓█  ░██░   ▒██░    ▒██   ██░  ▒   ██▒▒▓█  ▄ 
+  ░ ██▒▓░░ ████▓▒░▒▒█████▓    ░██████▒░ ████▓▒░▒██████▒▒░▒████▒
+   ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒    ░ ▒░▓  ░░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░░░ ▒░ ░
+ ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░    ░ ░ ▒  ░  ░ ▒ ▒░ ░ ░▒  ░ ░ ░ ░  ░
+ ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░      ░ ░   ░ ░ ░ ▒  ░  ░  ░     ░   
+ ░ ░         ░ ░     ░            ░  ░    ░ ░        ░     ░  ░
+ ░Better luck next time..... ░                                                           
+");
+            Reset();
+            
+           
           }
+
+          break;
+        case "flashlight":
+            if (CurrentRoom.Name.ToLower() == "storage")
+            {
+              Console.Clear();
+              Console.WriteLine(@"You used the flashlight, bold move Cotton
+                __    .-----, 
+ .-------------(__)--'     / \  
+/  ========         :     |.-|
+\                   :     |'-|
+ '-------------------.     \ /
+                      '-----'
+
+");
+              CurrentPlayer.Inventory.Remove(item);
+              Thread.Sleep(3000);
+              Console.WriteLine($"{item.UseItem}");
+              Thread.Sleep(2000);
+              Console.WriteLine(@"
+ __     ______  _    _  __          _______ _   _ 
+ \ \   / / __ \| |  | | \ \        / /_   _| \ | |
+  \ \_/ / |  | | |  | |  \ \  /\  / /  | | |  \| |
+   \   /| |  | | |  | |   \ \/  \/ /   | | | . ` |
+    | | | |__| | |__| |    \  /\  /   _| |_| |\  |
+    |_|  \____/ \____/      \/  \/   |_____|_| \_|
+                                                  
+");
+              Breathing = false;
+            }
+          
           break;
       }
 
