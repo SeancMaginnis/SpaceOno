@@ -5,7 +5,7 @@ namespace CastleGrimtol.Project.Interfaces
 {
     public interface IPlayer
     {
-        string PlayerName { get; set; }
+        string Name { get; set; }
         List<Item> Inventory { get; set; }
     }
 }

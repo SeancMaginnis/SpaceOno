@@ -30,3 +30,11 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+.idea/.idea.castle-grimtol/.idea/misc.xml
+.idea/.idea.castle-grimtol/riderModule.iml
+.idea/.idea.castle-grimtol/.idea/contentModel.xml
+.idea/.idea.castle-grimtol/.idea/encodings.xml
+.idea/.idea.castle-grimtol/.idea/indexLayout.xml
+.idea/.idea.castle-grimtol/.idea/modules.xml
+.idea/.idea.castle-grimtol/.idea/vcs.xml
+.idea/.idea.castle-grimtol/.idea/workspace.xml
